@@ -88,3 +88,5 @@ Other browser/Node/NPM configurations might work but haven't been tested.
 - "Product" works hard designing the messages: we must reproduce them faithfully, down to the last comma.
 - If you start with Functional, don't switch to Class-Based until Functional is passing all its tests (and vice versa).
 - If the direction of the `y` axis surprises you, know that elements in HTML also have their origin of coordinates on their top-left corner.
+
+// there are no interview questions in readme //
