@@ -35,7 +35,7 @@ export default class AppClass extends React.Component {
   }
 
   upHandler = () => {
-    if(this.state.y===1){
+    if(this.state.y === 1){
       this.setState({...this.state,tooFar:true,message:"You can't go up"})
     }else{
       this.setState((state) => ({
@@ -48,9 +48,45 @@ export default class AppClass extends React.Component {
     }
   }
   
+  leftHandler = () => {
+    if(this.state.x === 1){
+      this.setState({...this.state,tooFar:true,message:"You can't go left"})
+    }else{
+      this.setState((state) => ({
+        ...this.state,
+        x: state.x - 1,
+        steps: state.steps + 1,
+        tooFar: false,
+        message: ''
+      }))
+    }
+  }
 
+  rightHandler = () => {
+    if(this.state.x === 3){
+      this.setState({...this.state,tooFar:true,message:"You can't go right"})
+    }else{
+      this.setState((state) => ({
+        ...this.state,
+        x: state.x + 1,
+        steps: state.steps + 1,
+        tooFar:false,
+        message: ''
+      }))
+    }
+  }
+
+  emailHandler = (evt) => {
+    this.setState({
+      ...this.state,
+      email: evt.target.value
+    })
+  }
 
   render() {
+
+    const {x,y,steps} = this.state
+
     const { className } = this.props
     return (
       <div id="wrapper" className={className}>
