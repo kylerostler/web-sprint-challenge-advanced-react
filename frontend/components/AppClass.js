@@ -20,8 +20,13 @@ export default class AppClass extends React.Component {
     this.state = initState
   }
   
+  clearInput = () => {
+    document.getElementById("emailform").reset();
+  }
+
   resetHandler = () => {
-    this.setState(initState)
+    this.setState(initState);
+    this.clearInput();
   }
 
   downHandler = () => {
@@ -105,6 +110,7 @@ export default class AppClass extends React.Component {
     this.setState({...this.state, input: evt.target.reset()})
   }
 
+  
 
   render() {
 
@@ -115,7 +121,7 @@ export default class AppClass extends React.Component {
       <div id="wrapper" className={className}>
         <div className="info">
           <h3 id="coordinates">Coordinates ({x},{y})</h3>
-          <h3 id="steps">You moved {steps} times</h3>
+          {steps===1?<h3 id="steps">You moved {steps} time</h3>:<h3 id="steps">You moved {steps} times</h3>}
         </div>
         <div id="grid">
           {x===1 &&y===1?<div className="square active">B</div>:<div className="square"></div>}
@@ -139,7 +145,7 @@ export default class AppClass extends React.Component {
           <button onClick={this.downHandler} id="down">DOWN</button>
           <button onClick={this.resetHandler} id="reset">reset</button>
         </div>
-        <form onSubmit={this.onSubmit}>
+        <form id="emailform" onSubmit={this.onSubmit}>
           <input onChange={this.emailHandler} id="email" type="email" placeholder="type email"></input>
           <input  id="submit" type="submit"></input>
         </form>
