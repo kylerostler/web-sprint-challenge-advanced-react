@@ -9,6 +9,14 @@ export default function AppFunctional(props) {
 
   const {x,y,gridLimit,alert,steps} = state
 
+  const emailHandler = (evt) => {
+    evt.preventDefault();
+    this.setState({
+      ...this.state,
+      email: evt.target.value
+    })
+  }
+
   return (
     <div id="wrapper" className={props.className}>
       <div className="info">
@@ -27,7 +35,7 @@ export default function AppFunctional(props) {
           {x===3 &&y===3?<div className="square active">B</div>:<div className="square"></div>}
       </div>
       <div className="info">
-      {gridLimit?<h3 id="alert">{alert}</h3>:<h3 id="alert"></h3>}
+      {gridLimit?<h3 id="message">{alert}</h3>:<h3 id="message"></h3>}
       </div>
       <div id="keypad">
         <button onClick={leftHandler} id="left">LEFT</button>
@@ -37,7 +45,7 @@ export default function AppFunctional(props) {
         <button onClick={resetHandler} id="reset">reset</button>
       </div>
       <form>
-        <input id="email" type="email" placeholder="type email"></input>
+        <input onChange={emailHandler} id="email" type="email" placeholder="type email"></input>
         <input id="submit" type="submit"></input>
       </form>
     </div>

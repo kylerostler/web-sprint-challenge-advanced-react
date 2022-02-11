@@ -1,4 +1,6 @@
 import React from 'react'
+import axios from 'axios'
+import e from 'cors'
 
 const URL = 'http://localhost:9000/api/result'
 
@@ -8,7 +10,8 @@ const initState = {
   steps: 0,
   email: '',
   gridLimit: false,
-  alert: ''
+  alert: '',
+  message: ''
 }
 
 export default class AppClass extends React.Component {
@@ -84,6 +87,19 @@ export default class AppClass extends React.Component {
     })
   }
 
+  onSubmit = (evt) => {
+    evt.preventDefault()
+    const payloadToSend = { x: this.state.x, y: this.state.y, steps: this.state.steps, email: this.state.email}
+    axios.post(URL, payloadToSend)
+    .then(res => {
+      console.log(res.data)
+      this.setState({...this.state, message: res.data.message})
+    }).catch(err => {
+      console.error(err)
+    })
+  }
+
+
   render() {
 
     const {x,y,steps} = this.state
@@ -107,7 +123,8 @@ export default class AppClass extends React.Component {
           {x===3 &&y===3?<div className="square active">B</div>:<div className="square"></div>}
         </div>
         <div className="info">
-          {this.state.gridLimit?<h3 id="alert">{this.state.alert}</h3>:<h3 id="alert"></h3>}
+          {this.state.gridLimit?<h3 id="message">{this.state.alert}</h3>:<h3 id="message"></h3>}
+          {this.state.message?<h3 id="message">{this.state.message}</h3>:<h3 id="message"></h3>}
         </div>
         <div id="keypad">
           <button onClick={this.leftHandler} id="left">LEFT</button>
@@ -116,9 +133,9 @@ export default class AppClass extends React.Component {
           <button onClick={this.downHandler} id="down">DOWN</button>
           <button onClick={this.resetHandler} id="reset">reset</button>
         </div>
-        <form>
+        <form onSubmit={this.onSubmit}>
           <input onChange={this.emailHandler} id="email" type="email" placeholder="type email"></input>
-          <input id="submit" type="submit"></input>
+          <input  id="submit" type="submit"></input>
         </form>
       </div>
     )
