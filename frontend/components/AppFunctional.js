@@ -1,8 +1,12 @@
 import React from 'react'
+import useMoveSquare from '../hooks/CustomHooks'
 
 // need state to store coordinates of active square and steps
 
 export default function AppFunctional(props) {
+
+  const [resetHandler, downHandler, upHandler, rightHandler, leftHandler, state] = useMoveSquare();
+  
   return (
     <div id="wrapper" className={props.className}>
       <div className="info">
