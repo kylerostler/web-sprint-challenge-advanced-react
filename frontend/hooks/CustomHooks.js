@@ -1,5 +1,13 @@
 import { useState } from 'react'
-import { initState } from '../components/AppClass'
+
+const initState = {
+    x: 2,
+    y: 2,
+    steps: 0,
+    email: '',
+    tooFar: false,
+    message: ''
+  }
 
 
 const useMoveSquare = () => {
