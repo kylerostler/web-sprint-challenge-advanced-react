@@ -1,13 +1,14 @@
 import React from 'react'
 
 const URL = 'http://localhost:9000/api/result'
+
 const initState = {
   x: 2,
   y: 2,
   steps: 0,
   email: '',
-  tooFar: false,
-  message: ''
+  gridLimit: false,
+  alert: ''
 }
 
 export default class AppClass extends React.Component {
@@ -22,56 +23,56 @@ export default class AppClass extends React.Component {
 
   downHandler = () => {
     if(this.state.y === 3){
-      this.setState({...this.state,tooFar:true,message:"You can't go down"})
+      this.setState({...this.state,gridLimit:true,alert:"You can't go down"})
     }else{
       this.setState((state) => ({
         ...this.state,
         y: state.y + 1,
         steps: state.steps + 1,
-        tooFar: false,
-        message: ''
+        gridLimit: false,
+        alert: ''
       }))
     }
   }
 
   upHandler = () => {
     if(this.state.y === 1){
-      this.setState({...this.state,tooFar:true,message:"You can't go up"})
+      this.setState({...this.state,gridLimit:true,alert:"You can't go up"})
     }else{
       this.setState((state) => ({
         ...this.state,
         y: state.y - 1,
         steps: state.steps + 1,
-        tooFar: false,
-        message: ''
+        gridLimit: false,
+        alert: ''
       }))
     }
   }
   
   leftHandler = () => {
     if(this.state.x === 1){
-      this.setState({...this.state,tooFar:true,message:"You can't go left"})
+      this.setState({...this.state,gridLimit:true,alert:"You can't go left"})
     }else{
       this.setState((state) => ({
         ...this.state,
         x: state.x - 1,
         steps: state.steps + 1,
-        tooFar: false,
-        message: ''
+        gridLimit: false,
+        alert: ''
       }))
     }
   }
 
   rightHandler = () => {
     if(this.state.x === 3){
-      this.setState({...this.state,tooFar:true,message:"You can't go right"})
+      this.setState({...this.state,gridLimit:true,alert:"You can't go right"})
     }else{
       this.setState((state) => ({
         ...this.state,
         x: state.x + 1,
         steps: state.steps + 1,
-        tooFar:false,
-        message: ''
+        gridLimit:false,
+        alert: ''
       }))
     }
   }
@@ -106,7 +107,7 @@ export default class AppClass extends React.Component {
           {x===3 &&y===3?<div className="square active">B</div>:<div className="square"></div>}
         </div>
         <div className="info">
-          {this.state.tooFar?<h3 id="message">{this.state.message}</h3>:<h3 id="message"></h3>}
+          {this.state.gridLimit?<h3 id="alert">{this.state.alert}</h3>:<h3 id="alert"></h3>}
         </div>
         <div id="keypad">
           <button onClick={this.leftHandler} id="left">LEFT</button>

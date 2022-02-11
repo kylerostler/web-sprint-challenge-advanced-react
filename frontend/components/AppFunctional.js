@@ -7,13 +7,13 @@ export default function AppFunctional(props) {
 
   const [resetHandler, downHandler, upHandler, rightHandler, leftHandler, state] = useMoveSquare();
 
-  const {x,y,tooFar,message} = state
+  const {x,y,gridLimit,alert,steps} = state
 
   return (
     <div id="wrapper" className={props.className}>
       <div className="info">
-        <h3 id="coordinates">Coordinates ({state.x}, {state.y})</h3>
-        <h3 id="steps">You moved {state.steps} times</h3>
+        <h3 id="coordinates">Coordinates ({x}, {y})</h3>
+        <h3 id="steps">You moved {steps} times</h3>
       </div>
       <div id="grid">
           {x===1 &&y===1?<div className="square active">B</div>:<div className="square"></div>}
@@ -27,7 +27,7 @@ export default function AppFunctional(props) {
           {x===3 &&y===3?<div className="square active">B</div>:<div className="square"></div>}
       </div>
       <div className="info">
-      {tooFar?<h3 id="message">{message}</h3>:<h3 id="message"></h3>}
+      {gridLimit?<h3 id="alert">{alert}</h3>:<h3 id="alert"></h3>}
       </div>
       <div id="keypad">
         <button onClick={leftHandler} id="left">LEFT</button>
