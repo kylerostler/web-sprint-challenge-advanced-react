@@ -91,33 +91,33 @@ export default class AppClass extends React.Component {
     return (
       <div id="wrapper" className={className}>
         <div className="info">
-          <h3 id="coordinates">Coordinates (2, 2)</h3> {/** shows current coordinates */}
-          <h3 id="steps">You moved 0 times</h3> {/** counter ++ that tracks how many times the active coord have moved*/}
+          <h3 id="coordinates">Coordinates ({x},{y})</h3>
+          <h3 id="steps">You moved {steps} times</h3>
         </div>
         <div id="grid">
-          <div className="square"></div>
-          <div className="square"></div>
-          <div className="square"></div>
-          <div className="square"></div>
-          <div className="square active">B</div>
-          <div className="square"></div>
-          <div className="square"></div>
-          <div className="square"></div>
-          <div className="square"></div>
+          {x===1 &&y===1?<div className="square active">B</div>:<div className="square"></div>}
+          {x===2 &&y===1?<div className="square active">B</div>:<div className="square"></div>}
+          {x===3 &&y===1?<div className="square active">B</div>:<div className="square"></div>}
+          {x===1 &&y===2?<div className="square active">B</div>:<div className="square"></div>}
+          {x===2 &&y===2?<div className="square active">B</div>:<div className="square"></div>}
+          {x===3 &&y===2?<div className="square active">B</div>:<div className="square"></div>}
+          {x===1 &&y===3?<div className="square active">B</div>:<div className="square"></div>}
+          {x===2 &&y===3?<div className="square active">B</div>:<div className="square"></div>}
+          {x===3 &&y===3?<div className="square active">B</div>:<div className="square"></div>}
         </div>
         <div className="info">
-          <h3 id="message"></h3>
+          {this.state.tooFar?<h3 id="message">{this.state.message}</h3>:<h3 id="message"></h3>}
         </div>
-        <div id="keypad"> {/** each button needs functionality of changing active square changes coordinates*/}
-          <button id="left">LEFT</button>{/** x - 1, y stays */}
-          <button id="up">UP</button>{/** y - 1, x stays */}
-          <button id="right">RIGHT</button>{/** x + 1, y stays */}
-          <button id="down">DOWN</button>{/** y + 1, x stays */}
-          <button id="reset">reset</button> {/** resets square to middle 2,2 and resets count */}
+        <div id="keypad">
+          <button onClick={this.leftHandler} id="left">LEFT</button>
+          <button onClick={this.upHandler} id="up">UP</button>
+          <button onClick={this.rightHandler} id="right">RIGHT</button>
+          <button onClick={this.downHandler} id="down">DOWN</button>
+          <button onClick={this.resetHandler} id="reset">reset</button>
         </div>
-        <form> {/** accepts an email and spits an error if invalid */}
-          <input id="email" type="email" placeholder="type email"></input>
-          <input id="submit" type="submit"></input> {/** submits email that was input */}
+        <form>
+          <input onChange={this.emailHandler} id="email" type="email" placeholder="type email"></input>
+          <input id="submit" type="submit"></input>
         </form>
       </div>
     )
